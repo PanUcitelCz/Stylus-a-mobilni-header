@@ -1,50 +1,63 @@
-
+//Výtejte v preprocesorovým jazyce Stylus
+//Jedná se o nadstavbový jazyk CSS, v tomto jazyce nemusíte používat závorky, dvojtečky ani středníky
+//Jazyk se musí kompilovat do no souboru CSS(v našem případě ve složce dist/style.css)
+//Kompilaci zajišťuje plugin compilate Hero. KDyž si ho nainstalujete v rozšíření v VCS
+//stačí pak dole zapnout takové malé očíčko "Watchat SASS/SCSS"
+//Sám se Vám vytvoří soubor dist ve složce, kde se nachází stylus soubor. Můžete s tím volně pohybovat se sloužkou dist.
+//Pozor, musíte dodržovat odsazování, tím nahrazujete závorky
 body
-    margin 0
-    padding 0
+    margin 0 //Nastavíme si odsazení na 0
+    padding 0 //Nastavíme si vnitřní odsazení na 0, většina elementu si tohle opíše jako defaultní hodnotu
 
+//Hlavní rodič pro header
 header
-    width 100%
-    height 100px
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px
-    position relative
-    background-color: none
+    width 100% //Všimněte si, jak zde nejsou středníky, ani dvojtečky.
+    height 100px //Dodržujte odszaení ideálně pomocí tlačítka TAB
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px //Nastavíme si mále stínění pdo headerem, vypadá to pak dobře :P
+    position relative //Positions relative je jistota pro fungování positions absolute pro jiné své potomky
+    background-color: none //Zde nastavují barvu na žádnou, všimněte si, že dvojtečky můžete používat
 
+    //wrapper zde volám jako potomka header, do CSS se Vám vypíše jako - header .wrapper {Zde je pak Váš kód}
+    //Pokud by byla mimo header (odsazená uplně vlevo) vyhledavál by .wrapper v celém body. Tímhle ho vyledá jen v headeru (ve svém rodiči)
     .wrapper
-        max-width 1300px
-        margin auto
-        display flex
-        align-items center
-        height: 100%
-        justify-content: space-between
-        padding: 0 10px
-        background rgb(255, 255, 255)
-        z-index 10
-        position relative
+        max-width 1300px //Nastavujeme maximální šířku na 1300px
+        margin auto //Zarovnáme ho na prostředek, když bude šířka stránky vyšší než 1300px.
+        display flex //Nastavíme si jí jako displey flex pro lepší pozicování potomků
+        align-items center //Nastavíme si Y souřadnici na prostředek, itemy budou naprostředky v Y souřadnici (vertikálně)
+        height: 100% //Nastavíme si výšku na maximální výšku vůči svému rodiči
+        justify-content: space-between //Nastavíme si X souřadnici na maximálnní gap mezi itemy. Jsou nejvíce od sebe
+        padding: 0 10px //Nastavíme nějaké normální vnitřní odsazení, tento zápis jen kratší (0 - horní dolní a 10px - levé a pracvé vnitřní odsazení)
+        background rgb(255, 255, 255) //Nastavíme barvu na bílou, abychom pod ní mohli pak skrývat nav
+        z-index 10 //Zde nastavujeme úroveň vstvy, vyšší má vyšší právo překrýt jiný element
+        position relative //Díky tomu nám funguje z-index mezi wrapper a nav, wrapper bude překrývat pomocí z-index nav, pokud budou ve stejné pozici
         
-
+        //& (píšeme pomocá pravý alt + c)
+        //& opíše svého rodiče a přídáte jméno potomka
+        //&-logo je stejný jako .wrapper-logo
         &-logo
-            width: 50px
+            width: 50px //nastavíme výšku a šířku loga
             height: 50px
 
             img
-                width: 100%
+                width: 100% //img se přizpůsobí maximální šířce i výšce svého rodiče
                 height: 100%
         
+        //Zase opisujin rodiče pomocí &
         &-hamburger
-            width 50px
+            width 50px //Nastavíme maximální šířku a výšku
             height 30px
-            display flex
-            flex-direction column
-            justify-content space-between
-            cursor pointer
-            margin-right: 20px
+            display flex //Chceme, aby spany byly flex, pro lepší pozicování
+            flex-direction column //Chceme aby byly spany pod sebou
+            justify-content space-between //Roztáhneme je co nejvíce od sebe na maximální výšku hamburgeru (50px)
+            cursor pointer //Natsavíme ukazatele na ručičku neboli pointer, kfyž na ní najedeme myší
+            margin-right: 20px //Tím si jen odsadím hamburger, aby nebyl tak moc v pravo (margin je vnější odsazení!!!)
 
             span
-                border: 2px solid black
-
+                border: 2px solid black //Aby spany byli vidět, musíme jím dát aspoň nějakou barvu, například pomocí borderu. automaticky se jejich šířka dává na 100% vuči svému rodiči
+    //Nastavíme si nav, zase ho hledáme v rodiči header
     nav
-        position: absolute
-        left: 50%
-        transform: translateX(-50%) translateY(-50px)
-        z-index: 1
+        position: absolute //Positions absolute (nefunguje, pokud jeho ridič není relative), díky tomu si mohu lépe pozicovat celý nav
+        left: 50% //Nastavím si nav na prostředek, ale bude na prostředku pouze jeho začátek
+        //pomocí translateX nastavujeme souřadnici X, pro Y zase její souřadnici, můžeme používat procenta i jiné jednotky, pokud dáte 100%, tak se posune o 100% šírku nav
+        transform: translateX(-50%) translateY(-50px) //Tímto srovnam i jeho content, že má být na prostředku, díky tomhle budeme animovat nav
+        z-index: 1 //Nastavíme z-index na 1, aby se mohl skrývat pod .wrapper
