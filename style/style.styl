@@ -1,7 +1,7 @@
-//Výtejte v preprocesorovým jazyce Stylus
+//Vítejte v preprocesorovým jazyce Stylus
 //Jedná se o nadstavbový jazyk CSS, v tomto jazyce nemusíte používat závorky, dvojtečky ani středníky
 //Jazyk se musí kompilovat do no souboru CSS(v našem případě ve složce dist/style.css)
-//Kompilaci zajišťuje plugin compilate Hero. KDyž si ho nainstalujete v rozšíření v VCS
+//Kompilaci zajišťuje plugin compilate Hero. Když si ho nainstalujete v rozšíření v VCS
 //stačí pak dole zapnout takové malé očíčko "Watchat SASS/SCSS"
 //Sám se Vám vytvoří soubor dist ve složce, kde se nachází stylus soubor. Můžete s tím volně pohybovat se sloužkou dist.
 //Pozor, musíte dodržovat odsazování, tím nahrazujete závorky
@@ -41,7 +41,18 @@ header
             img
                 width: 100% //img se přizpůsobí maximální šířce i výšce svého rodiče
                 height: 100%
-        
+
+        .is-active
+            
+            
+            span:nth-child(1)
+                transform: rotate(45deg) translate(6px, 13px)
+            
+            span:nth-child(2)
+                display: none
+
+            span:nth-child(3)
+                transform: rotate(-45deg) translate(4px, -13px)
         //Zase opisujin rodiče pomocí &
         &-hamburger
             width 50px //Nastavíme maximální šířku a výšku
@@ -51,9 +62,12 @@ header
             justify-content space-between //Roztáhneme je co nejvíce od sebe na maximální výšku hamburgeru (50px)
             cursor pointer //Natsavíme ukazatele na ručičku neboli pointer, kfyž na ní najedeme myší
             margin-right: 20px //Tím si jen odsadím hamburger, aby nebyl tak moc v pravo (margin je vnější odsazení!!!)
+            transform: ease transform .6s
 
             span
                 border: 2px solid black //Aby spany byli vidět, musíme jím dát aspoň nějakou barvu, například pomocí borderu. automaticky se jejich šířka dává na 100% vuči svému rodiči
+    
+        
     //Nastavíme si nav, zase ho hledáme v rodiči header
     nav
         position: absolute //Positions absolute (nefunguje, pokud jeho ridič není relative), díky tomu si mohu lépe pozicovat celý nav
