@@ -42,17 +42,25 @@ header
                 width: 100% //img se přizpůsobí maximální šířce i výšce svého rodiče
                 height: 100%
 
+        //Zde upravujeme classu, kterou přidáváme pomocí JS do hamburgeru
         .is-active
+            //Můžeme mít i prázdný selektor, ovšem dodržujte úrovně pro další selektory
             
-            
+            //nth-child() - pokud máme element, který má v sobě prvky (v našem případě jsou to potomci v is-active), můžeme se na ně odkazivat čísli
             span:nth-child(1)
+                //transform - čeká na příkaz, který se odehraje při eventu (události)
+                //rotate - otáčení prvku deg jako stupně
+                //Kratší zápis pro translate(x,y)
                 transform: rotate(45deg) translate(6px, 13px)
             
             span:nth-child(2)
+                //Vypne daný element
+                //Vypíná to přímo příkaz none
                 display: none
 
             span:nth-child(3)
                 transform: rotate(-45deg) translate(4px, -13px)
+        
         //Zase opisujin rodiče pomocí &
         &-hamburger
             width 50px //Nastavíme maximální šířku a výšku
