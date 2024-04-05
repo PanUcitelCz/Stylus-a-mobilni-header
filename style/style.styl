@@ -41,25 +41,6 @@ header
             img
                 width: 100% //img se přizpůsobí maximální šířce i výšce svého rodiče
                 height: 100%
-
-        //Zde upravujeme classu, kterou přidáváme pomocí JS do hamburgeru
-        .is-active
-            //Můžeme mít i prázdný selektor, ovšem dodržujte úrovně pro další selektory
-            
-            //nth-child() - pokud máme element, který má v sobě prvky (v našem případě jsou to potomci v is-active), můžeme se na ně odkazivat čísli
-            span:nth-child(1)
-                //transform - čeká na příkaz, který se odehraje při eventu (události)
-                //rotate - otáčení prvku deg jako stupně
-                //Kratší zápis pro translate(x,y)
-                transform: rotate(45deg) translate(6px, 13px)
-            
-            span:nth-child(2)
-                //Vypne daný element
-                //Vypíná to přímo příkaz none
-                display: none
-
-            span:nth-child(3)
-                transform: rotate(-45deg) translate(4px, -13px)
         
         //Zase opisujin rodiče pomocí &
         &-hamburger
@@ -70,16 +51,54 @@ header
             justify-content space-between //Roztáhneme je co nejvíce od sebe na maximální výšku hamburgeru (50px)
             cursor pointer //Natsavíme ukazatele na ručičku neboli pointer, kfyž na ní najedeme myší
             margin-right: 20px //Tím si jen odsadím hamburger, aby nebyl tak moc v pravo (margin je vnější odsazení!!!)
-            transform: ease transform .6s
+            transition: transform ease 1s
 
             span
+                transition: transform ease 1s
+                transition: ease 1s
                 border: 2px solid black //Aby spany byli vidět, musíme jím dát aspoň nějakou barvu, například pomocí borderu. automaticky se jejich šířka dává na 100% vuči svému rodiči
     
+         //Zde upravujeme classu, kterou přidáváme pomocí JS do hamburgeru
+        .is-active
+            //Můžeme mít i prázdný selektor, ovšem dodržujte úrovně pro další selektory
+            transform: rotate(360deg)
+            //nth-child() - pokud máme element, který má v sobě prvky (v našem případě jsou to potomci v is-active), můžeme se na ně odkazivat čísli
+            span:nth-child(1)
+                //transform - čeká na příkaz, který se odehraje při eventu (události)
+                //rotate - otáčení prvku deg jako stupně
+                //Kratší zápis pro translate(x,y)
+                transform: rotate(45deg) translate(6px, 13px)
+            
+            span:nth-child(2)
+                //Vypne daný element
+                //Vypíná to přímo příkaz none
+                opacity 0
+
+            span:nth-child(3)
+                transform: rotate(-45deg) translate(4px, -13px)
         
     //Nastavíme si nav, zase ho hledáme v rodiči header
     nav
         position: absolute //Positions absolute (nefunguje, pokud jeho ridič není relative), díky tomu si mohu lépe pozicovat celý nav
         left: 50% //Nastavím si nav na prostředek, ale bude na prostředku pouze jeho začátek
         //pomocí translateX nastavujeme souřadnici X, pro Y zase její souřadnici, můžeme používat procenta i jiné jednotky, pokud dáte 100%, tak se posune o 100% šírku nav
-        transform: translateX(-50%) translateY(-50px) //Tímto srovnam i jeho content, že má být na prostředku, díky tomhle budeme animovat nav
+        transform: translateX(-50%) translateY(-350px) //Tímto srovnam i jeho content, že má být na prostředku, díky tomhle budeme animovat nav
         z-index: 1 //Nastavíme z-index na 1, aby se mohl skrývat pod .wrapper
+        width: 100%
+        display: flex
+        flex-direction: column
+        gap: 36px
+        justify-content: center
+        align-items: center
+        padding: 16px 0
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px
+        transition: transform ease 1s
+
+        a
+            font-family: Arial, Helvetica, sans-serif
+            text-decoration: none
+            color black
+            font-weight: bold
+
+    .is-open
+        transform: translateX(-50%) translateY(0px)

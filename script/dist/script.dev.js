@@ -17,14 +17,14 @@ hamburger.addEventListener("click", function () {
   if (state == true) {
     hamburger.classList.remove("is-active"); //Zde naopak třídu is-active odstraňujeme z elementu, tím docílíme animovní pro zpětnou pozici v defaultní hodnotě (pojede menu zpět nahoru)
 
-    nav.classList.remove("is-active"); //To samé jako v horním řádku, ale pro nav
+    nav.classList.remove("is-open"); //To samé jako v horním řádku, ale pro nav
 
     state = false; //Nastavujeme zpět na false, aby se nestalo, že proběhné příkaz dvakrát po sobě. Díky tomu funguje tato podmínka. Pozor, musíte pokažde kliknout na hamburger, aby to fungovalo
   } //Pokud state je false, splní se tato podmínka
   else {
       hamburger.classList.add("is-active"); //Volám proměnou hamburger, která odkazuje na html. Používám classlist.add - přidávám do elementu další classu, kterou jsem si pojmenoval "is-active". Tuto třídu my upravíme a podle toho se projeví animace
 
-      nav.classList.add("is-active"); //Tady děláme to samé, jako v horním řádku, ale přidáváme jí pro element nav, aby se animace projevila pro nav společně, například naprogramuje ve stylusu to, aby nav popojelo dolů
+      nav.classList.add("is-open"); //Tady děláme to samé, jako v horním řádku, ale přidáváme jí pro element nav, aby se animace projevila pro nav společně, například naprogramuje ve stylusu to, aby nav popojelo dolů
 
       state = true; //Zde měním state na true, aby po druhý proběhl opačný proces, tím se nám navigace bude posouvat nahoru a dolů a hamburer rozevírat a zavírat
     }
