@@ -32,7 +32,7 @@ function ControlWidth() {
     
     //Podmínka která kontroluje šířku okna (celé stránky)
     //Díky tomu pokud někdo zvětší šířku stránky a bude otevřený hamburger s navigací, tohle zařídí aby se classy odebrali)
-    if (sirka < 768)
+    if (sirka > 768)
     {
         hamburger.classList.remove("is-active"); //Odebere classu s hamburgeru .is-active
         nav.classList.remove("is-open"); //Odebere classu s navigace
@@ -44,8 +44,9 @@ function ControlWidth() {
 //window - objekt který prezentuje okno prohlížeče
 //addEventListener - přidává událost a naslouchá
 //resize - spustí se, pokud se změní velikost okna
-//ControlWidth() - spustí se funkce, kterou jsme vytvořili
-window.addEventListener('resize', ControlWidth());
+//ControlWidth() - spustí se funkce, kterou jsme vytvořili, pozor tady voláme bez závorek
+window.addEventListener('resize', ControlWidth);
+
 
 
 //Díky tomuto může fungovat animace, když se přidává nebo odebírá přidaná třída do elementu.
