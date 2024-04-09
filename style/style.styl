@@ -51,54 +51,79 @@ header
             justify-content space-between //Roztáhneme je co nejvíce od sebe na maximální výšku hamburgeru (50px)
             cursor pointer //Natsavíme ukazatele na ručičku neboli pointer, kfyž na ní najedeme myší
             margin-right: 20px //Tím si jen odsadím hamburger, aby nebyl tak moc v pravo (margin je vnější odsazení!!!)
-            transition: transform ease 1s
+            transition: transform ease 1s //Toto je animace pro celý hamburger, pro spany jsou níže - informace, že při změně pravidel to má být animovaný přechod
 
             span
-                transition: transform ease 1s
-                transition: ease 1s
+                transition: transform ease 1s //Zde zajišťujeme animace spanu, jelikož classa .is-active spouští nová pravidla pro spany, transoform zde je informace, že animace je zamřena na transform
+                transition: ease 1s //Tahle animace je zaměřena na ostatní (barvy apod.) Ovšem pro transofrm sama o sobě nefunguje
                 border: 2px solid black //Aby spany byli vidět, musíme jím dát aspoň nějakou barvu, například pomocí borderu. automaticky se jejich šířka dává na 100% vuči svému rodiči
-    
-         //Zde upravujeme classu, kterou přidáváme pomocí JS do hamburgeru
+
+            //Tomuhle se říka breakpoint, tohle nám měni pravidal, pokud se šířka okna změní na určitou hodnotu
+            //V závorce min-width nám říka, pokud bude minimální šířka 768px, aktivují se tyto pravidla a budou nadřezený vůči předchozím
+            //Tohle je zásadní, když děláme first mobile design, protože chceme, aby se pravidla měnili na silnějším zařízení
+            @media only screen and (min-width: 768px)
+                display: none //tímto vypneme habmurger, protože zde menu bude už normálně v headeru. Platí to pro hamburger, protože se nachází v úrovni pravidel pro hamburger
+
+         //Zde upravujeme classu, kterou přidáváme pomocí JS do hamburgeru, dojde díky tomu k animaci
         .is-active
             //Můžeme mít i prázdný selektor, ovšem dodržujte úrovně pro další selektory
-            transform: rotate(360deg)
+            transform: rotate(360deg) //Zde vidíte, že si dá hrát i s celým hamburgerem pomocí transformu, příklad tohohle se nám celý hamburger otočí
             //nth-child() - pokud máme element, který má v sobě prvky (v našem případě jsou to potomci v is-active), můžeme se na ně odkazivat čísli
             span:nth-child(1)
                 //transform - čeká na příkaz, který se odehraje při eventu (události)
                 //rotate - otáčení prvku deg jako stupně
                 //Kratší zápis pro translate(x,y)
-                transform: rotate(45deg) translate(6px, 13px)
+                transform: rotate(45deg) translate(6px, 13px) //Zde nastavuji pohyb spanu, aby se nám rozanimoval křížek z hamburgeru, doporučení, hodnoty si nastavte v inscapu (prozkoumat prvek) v prohlížeči a pak hodnoty jen přepište
             
             span:nth-child(2)
                 //Vypne daný element
                 //Vypíná to přímo příkaz none
-                opacity 0
+                opacity 0 //Zde nastavujeme opacity na 0, respektive ho zprůhleníme, pokud by byla 1, je neprůhledná
 
             span:nth-child(3)
-                transform: rotate(-45deg) translate(4px, -13px)
+                transform: rotate(-45deg) translate(4px, -13px) //Stejný systém jako u prvního, akorát ho děláte trochu obráceně. Doporučení, zkuste si tyto hodnoty měnit v prohlížeči
         
     //Nastavíme si nav, zase ho hledáme v rodiči header
     nav
         position: absolute //Positions absolute (nefunguje, pokud jeho ridič není relative), díky tomu si mohu lépe pozicovat celý nav
         left: 50% //Nastavím si nav na prostředek, ale bude na prostředku pouze jeho začátek
         //pomocí translateX nastavujeme souřadnici X, pro Y zase její souřadnici, můžeme používat procenta i jiné jednotky, pokud dáte 100%, tak se posune o 100% šírku nav
-        transform: translateX(-50%) translateY(-350px) //Tímto srovnam i jeho content, že má být na prostředku, díky tomhle budeme animovat nav
+        transform: translateX(-50%) translateY(-350px) //Tímto srovnam i jeho content, že má být na prostředku, díky tomhle budeme animovat nav. Osa Y je na -350px, tím pádem nám úplně vyjede ze stránky pryč, tím že je apsolutní, nám nerozbije stránku.
         z-index: 1 //Nastavíme z-index na 1, aby se mohl skrývat pod .wrapper
-        width: 100%
-        display: flex
-        flex-direction: column
-        gap: 36px
-        justify-content: center
-        align-items: center
-        padding: 16px 0
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px
-        transition: transform ease 1s
+        width: 100% //roztáhneme celé menu na plnou šířku
+        display: flex //Chceme zarovnat itemy, takže použijeme pro pozicování displey flex
+        flex-direction: column //Dáme si odkazy pod sebe - column jako sloupec
+        gap: 36px //Nějaké odsazení mezi itemami
+        justify-content: center //Zarovnáme si je nastřed (pozor pokud je column, je to obráceně - zjednodušeně řečeno osa x je Y)
+        align-items: center //Zarovnáme též na střed
+        padding: 16px 0 //Dáme vnitřní odsazení - kratší zápis padding: horní/dolní pravá/levá
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px //Zde máme stejný box shadow jako u header, vytváří nám heké ohraničení navigace
+        transition: transform ease 1s //transitions - infomraci k animaci při změně, transform - informace, že se jedná o anmaci transformu, ease - informace o druhu animace, .3s - jak dlouho bue animace trvat, pokud je tam tecka a hned číslo, je to jako 0.3s. Pokud bycho zde nenapsali transform, animace by se neprovedla
 
+        //Nastavíme si pravidla pro odkazy
         a
-            font-family: Arial, Helvetica, sans-serif
-            text-decoration: none
-            color black
-            font-weight: bold
+            font-family: Arial, Helvetica, sans-serif //Druh fontů, můžete si nahrát i vlastní
+            text-decoration: none //Podtržení si tímto vypneme, none - vypnout jakoukoliv dekoraci
+            color black //Barva písma
+            font-weight: bold //Nastavíme si text tučně, můžeme použít i čísla 100,200,300 ... 900
+            transition: ease .3s //Nastavíme animaci pro a
 
+        @media only screen and (min-width: 768px)
+            z-index: 10 //Změníme úroveň vrstvy, protože chceme aby šla navigace vidět v headeru
+            flex-direction: row //Ze sloupce uděláme řádek
+            justify-content: flex-end //Je dost časté, že navigace je v pravo
+            padding-right: 60px //Aby nebyl header nalepený úplně u rohu, dáme mu odsazení jen na pravou stranu
+            transform: translate(-50%, -150%) //Zde nastavíme pomocí positions absolute aby byl krásně uprostřed (-150%), X stále drříme defaultní hodnotu jako u prvního
+            max-width: 1300px //Nastavíme maximální šířku na 1300px, translateX(-50%) o řádek víše nám hlídá, aby byl na prostředku
+            background: none //Pokud byl nějaky background, tímhle ho vypnu, chci, aby byla stejná barva jakoje header
+            box-shadow: none //Chceme vypnout box-shadow aby nešlo vidět zbytečně v headeru
+
+            //Můžeme měnit pravidla i pro potomky v tomto selektoru
+            a:hover
+                color red //Zde nasatvíme hover jen pro větší zařízení, než je mobil - logicky na telefonu je nepotřebujeme
+
+    //Zde je třída, která se přidá do navigace přes JavaScript, zde se aktivuje i animace, pokud se třída přidá nebo odebere
     .is-open
-        transform: translateX(-50%) translateY(0px)
+        //translateX(-50%) - musíme mu říct, že hodnota pro X je stále stejná jako v základu, jinak si jí dá do defaultní hodnoty 0
+        transform: translateX(-50%) translateY(0px) //Zde nastavujeme, jak se pohne, pokud se třída přidá, měníme hlavně Y na 0, tím se nám navigace posune hned pod header.
+        
